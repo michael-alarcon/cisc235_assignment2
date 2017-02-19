@@ -15,7 +15,13 @@ public class Cisc235_assignment2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        BinaryTreeVertex a = new BinaryTreeVertex();
+        BinarySearchTree x = new BinarySearchTree(a);
+        
+        x.insert(6);
+        x.insert(10);
+        x.insert(8);
+        x.searchPath(8);
     }
     
 }
