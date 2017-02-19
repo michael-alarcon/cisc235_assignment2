@@ -15,13 +15,12 @@ public class Cisc235_assignment2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        BinaryTreeVertex a = new BinaryTreeVertex();
-        BinarySearchTree x = new BinarySearchTree(a);
+        BinarySearchTree sTree = new BinarySearchTree();
         
-        x.insert(6);
-        x.insert(10);
-        x.insert(8);
-        x.searchPath(8);
+        sTree.insert(6);
+//        sTree.insert(10);
+//        x.insert(8);
+        sTree.searchPath(6);
     }
     
 }

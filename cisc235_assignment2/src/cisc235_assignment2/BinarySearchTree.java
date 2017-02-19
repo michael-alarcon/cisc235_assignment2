@@ -22,17 +22,21 @@ public class BinarySearchTree {
     }
 
     public void insert(int value) {
+//        System.out.println(value + " current: " + root.value);
         root = insert(root, value);
     }
 
-    private BinaryTreeVertex insert(BinaryTreeVertex tree, int newValue) {
+    public BinaryTreeVertex insert(BinaryTreeVertex tree, int newValue) {
         if (tree.value == null) {
-            tree = new BinaryTreeVertex(newValue);
-            return tree;
-        } else if (tree.value > newValue) {
-            return insert(tree.left, newValue);
+            return new BinaryTreeVertex(newValue);
+//            return tree;
         } else {
-            return insert(tree.right, newValue);
+            if (newValue < tree.getValue()) {
+                tree.left = insert(tree.left, newValue);
+            } else {
+                tree.right = insert(tree.right, newValue);
+            }
+            return tree;
         }
     }
 
@@ -43,9 +47,9 @@ public class BinarySearchTree {
     private String searchPath(BinaryTreeVertex tree, int value) {
         if (tree.value == null) {
             return "";
-        } else if (tree.value == value) {
+        } else if (tree.getValue() == value) {
             return value + "";
-        } else if (value > tree.value) {
+        } else if (value > tree.getValue()) {
             return tree.value + ", " + searchPath(tree.right, value);
         } else {
             return tree.value + ", " + searchPath(tree.left, value);
@@ -54,5 +58,28 @@ public class BinarySearchTree {
 
     public int totalDepth(BinaryTreeVertex tree) {
         return 0;
+    }
+    
+    class BinaryTreeVertex {
+
+        Integer value;
+        BinaryTreeVertex left;
+        BinaryTreeVertex right;
+
+        public BinaryTreeVertex() {
+            this.value = null;
+            this.left = null;
+            this.right = null;
+        }
+
+        public BinaryTreeVertex(int value) {
+            this.value = value;
+            this.left = null;
+            this.right = null;
+        }
+
+        public int getValue() {
+            return this.value;
+        }
     }
 }
