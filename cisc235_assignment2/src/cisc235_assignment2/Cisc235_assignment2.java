@@ -18,9 +18,12 @@ public class Cisc235_assignment2 {
         BinarySearchTree sTree = new BinarySearchTree();
         
         sTree.insert(6);
-//        sTree.insert(10);
-//        x.insert(8);
-        sTree.searchPath(6);
+        sTree.insert(10);
+        sTree.insert(8);
+        sTree.insert(3);
+        sTree.insert(20);
+        sTree.searchPath(8);
+        sTree.totalDepth();
     }
     
 }

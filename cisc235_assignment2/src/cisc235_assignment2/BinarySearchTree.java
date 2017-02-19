@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cisc235_assignment2;
 
 /**
@@ -13,25 +8,24 @@ public class BinarySearchTree {
 
     BinaryTreeVertex root;
 
-    public BinarySearchTree() {
+    protected BinarySearchTree() {
         this.root = null;
     }
 
-    public BinarySearchTree(BinaryTreeVertex node) {
+    protected BinarySearchTree(BinaryTreeVertex node) {
         this.root = node;
     }
 
-    public void insert(int value) {
-//        System.out.println(value + " current: " + root.value);
+    protected void insert(int value) {
         root = insert(root, value);
     }
 
-    public BinaryTreeVertex insert(BinaryTreeVertex tree, int newValue) {
-        if (tree.value == null) {
-            return new BinaryTreeVertex(newValue);
-//            return tree;
+    private BinaryTreeVertex insert(BinaryTreeVertex tree, int newValue) {
+        if (tree == null) {
+            tree = new BinaryTreeVertex(newValue);
+            return tree;
         } else {
-            if (newValue < tree.getValue()) {
+            if (newValue <= tree.getValue()) {
                 tree.left = insert(tree.left, newValue);
             } else {
                 tree.right = insert(tree.right, newValue);
@@ -40,12 +34,12 @@ public class BinarySearchTree {
         }
     }
 
-    public void searchPath(int value) {
+    protected void searchPath(int value) {
         System.out.println(searchPath(root, value));
     }
 
     private String searchPath(BinaryTreeVertex tree, int value) {
-        if (tree.value == null) {
+        if (tree == null) {
             return "";
         } else if (tree.getValue() == value) {
             return value + "";
@@ -56,11 +50,19 @@ public class BinarySearchTree {
         }
     }
 
-    public int totalDepth(BinaryTreeVertex tree) {
-        return 0;
+    protected void totalDepth() {
+        System.out.println(totalDepth(root, 0));
     }
     
-    class BinaryTreeVertex {
+    public int totalDepth(BinaryTreeVertex tree, int level) {
+        if (tree == null) {
+            return 0;
+        } else {
+            return level + totalDepth(tree.left, level+1) + totalDepth(tree.right, level+1);
+        }
+    }
+    
+    protected class BinaryTreeVertex {
 
         Integer value;
         BinaryTreeVertex left;
