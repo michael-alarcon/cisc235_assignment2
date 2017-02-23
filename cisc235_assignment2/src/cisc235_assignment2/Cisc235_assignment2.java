@@ -15,15 +15,24 @@ public class Cisc235_assignment2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        BinarySearchTree sTree = new BinarySearchTree();
+//        BinarySearchTree sTree = new BinarySearchTree();
+//        
+//        sTree.insert(6);
+//        sTree.insert(10);
+//        sTree.insert(8);
+//        sTree.insert(3);
+//        sTree.insert(20);
+//        sTree.searchPath(8);
+//        sTree.totalDepth();
         
-        sTree.insert(6);
-        sTree.insert(10);
-        sTree.insert(8);
-        sTree.insert(3);
-        sTree.insert(20);
-        sTree.searchPath(8);
-        sTree.totalDepth();
+        RedBlackTree rbTree = new RedBlackTree();
+        
+        rbTree.insert(6);
+        
+//        System.out.println(rbTree.root.getColour() + " " + rbTree.root.left.getValue());
+        rbTree.insert(1);
+//        rbTree.searchPath(8);
+        rbTree.totalDepth();
     }
     
 }
