@@ -14,7 +14,7 @@ public class RedBlackTree {
     RedBlackVertex root;
 
     public RedBlackTree() {
-        this.root = null;
+        this.root = new RedBlackVertex();
     }
 
     public RedBlackTree(RedBlackVertex node) {
@@ -23,11 +23,11 @@ public class RedBlackTree {
 
     protected void insert(int value) {
         root = insert(root, value);
-        root.colour = "Black";
+        root.setColour("Black");
     }
 
     protected RedBlackVertex insert(RedBlackVertex tree, int newValue) {
-        if (tree == null) {
+        if (tree.isLeaf) {
             tree = new RedBlackVertex(newValue);
             return tree;
         } else if (newValue <= tree.getValue()) {
@@ -61,6 +61,7 @@ public class RedBlackTree {
     }
 
     private RedBlackVertex fixTree(RedBlackVertex tree, String fixType) {
+        RedBlackVertex grandChild;
         RedBlackVertex child;
         RedBlackVertex sibling;
         if (fixType.equals("rr")) {
@@ -87,7 +88,7 @@ public class RedBlackTree {
                 tree.setColour("Red");
                 return tree;
             } else {
-                RedBlackVertex grandChild = child.left;
+                grandChild = child.left;
                 child.left = grandChild.right;
                 tree.right = grandChild.left;
                 grandChild.left = tree;
@@ -120,7 +121,7 @@ public class RedBlackTree {
                 tree.setColour("Red");
                 return tree;
             } else {
-                RedBlackVertex grandChild = child.right;
+                grandChild = child.right;
                 child.right = grandChild.left;
                 tree.left = grandChild.right;
                 grandChild.right = tree;
@@ -131,13 +132,29 @@ public class RedBlackTree {
             }
         }
     }
+    
+    protected void searchPath(int value) {
+        System.out.println(searchPath(root, value));
+    }
+
+    private String searchPath(RedBlackVertex tree, int value) {
+        if (tree == null) {
+            return "";
+        } else if (tree.getValue() == value) {
+            return value + "";
+        } else if (value > tree.getValue()) {
+            return tree.value + ", " + searchPath(tree.right, value);
+        } else {
+            return tree.value + ", " + searchPath(tree.left, value);
+        }
+    }
 
     protected void totalDepth() {
         System.out.println(totalDepth(root, 0));
     }
 
     private int totalDepth(RedBlackVertex tree, int level) {
-        if (tree == null) {
+        if (tree.isLeaf) {
             return 0;
         } else {
             return level + totalDepth(tree.left, level + 1) + totalDepth(tree.right, level + 1);
@@ -155,19 +172,15 @@ public class RedBlackTree {
         public RedBlackVertex() {
             this.value = null;
             this.left = null;
-//            this.left.isLeaf = true;
             this.right = null;
-//            this.right.isLeaf = true;
             this.colour = "Black";
             this.isLeaf = true;
         }
 
         public RedBlackVertex(int value) {
             this.value = value;
-            this.left = null;
-//            this.left.isLeaf = true;
-            this.right = null;
-//            this.right.isLeaf = true;
+            this.left = new RedBlackVertex();
+            this.right = new RedBlackVertex();
             this.colour = "Red";
             this.isLeaf = false;
         }
@@ -177,9 +190,6 @@ public class RedBlackTree {
         }
 
         public int getValue() {
-            if (this.isLeaf == true) {
-                return -1;
-            }
             return value;
         }
 
