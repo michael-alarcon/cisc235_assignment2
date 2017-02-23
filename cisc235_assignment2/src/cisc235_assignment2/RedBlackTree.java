@@ -12,6 +12,7 @@ package cisc235_assignment2;
 public class RedBlackTree {
 
     RedBlackVertex root;
+    int totalRotations = 0;
 
     public RedBlackTree() {
         this.root = new RedBlackVertex();
@@ -64,6 +65,7 @@ public class RedBlackTree {
         RedBlackVertex grandChild;
         RedBlackVertex child;
         RedBlackVertex sibling;
+        totalRotations++;
         if (fixType.equals("rr")) {
             child = tree.right;
             sibling = tree.left;
