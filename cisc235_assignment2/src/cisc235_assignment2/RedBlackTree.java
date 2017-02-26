@@ -1,19 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cisc235_assignment2;
 
 /**
- *
- * @author Michael Alarcon
+ * @author Michael Alarcon Student ID - 10172841 I confirm that this submission
+ * is my own work and is consistent with the Queen's regulations on Academic
+ * Integrity.
  */
 public class RedBlackTree {
 
-    RedBlackVertex root;
-    int totalRotations = 0;
+    private RedBlackVertex root;
+    private int totalRotations = 0;
 
+    //Constructors
     public RedBlackTree() {
         this.root = new RedBlackVertex();
     }
@@ -27,6 +24,12 @@ public class RedBlackTree {
         root.setColour("Black");
     }
 
+    /**
+     * Inserts a new value to the red black tree
+     * @param tree tree the value is being inserted into
+     * @param newValue the value being inserted
+     * @return returns the updated tree
+     */
     protected RedBlackVertex insert(RedBlackVertex tree, int newValue) {
         if (tree.isLeaf) {
             tree = new RedBlackVertex(newValue);
@@ -61,11 +64,18 @@ public class RedBlackTree {
         return tree;
     }
 
+    /**
+     * Fixes the red black tree depending on the situation.
+     * @param tree the tree to be fixed
+     * @param fixType type of fixed needed to be implemented
+     * @return the fixed tree
+     */
     private RedBlackVertex fixTree(RedBlackVertex tree, String fixType) {
         RedBlackVertex grandChild;
         RedBlackVertex child;
         RedBlackVertex sibling;
         totalRotations++;
+        
         if (fixType.equals("rr")) {
             child = tree.right;
             sibling = tree.left;
@@ -139,6 +149,12 @@ public class RedBlackTree {
         System.out.println(searchPath(root, value));
     }
 
+    /**
+     * Searches for the path of a desired value.
+     * @param tree tree to be searched
+     * @param value value to be searched
+     * @return a string which displays the path to get to the value
+     */
     private String searchPath(RedBlackVertex tree, int value) {
         if (tree == null) {
             return "";
@@ -155,6 +171,12 @@ public class RedBlackTree {
         System.out.println(totalDepth(root, 0));
     }
 
+    /**
+     * Returns the sum of the depths of all the values in the tree
+     * @param tree tree to be used
+     * @param level the level of the value in the tree where the root is level 0
+     * @return the total depth
+     */
     private int totalDepth(RedBlackVertex tree, int level) {
         if (tree.isLeaf) {
             return 0;
@@ -163,14 +185,18 @@ public class RedBlackTree {
         }
     }
 
+    /**
+     * Inner class used only for the RedBlackTree class.
+     */
     protected class RedBlackVertex {
 
-        Integer value;
-        RedBlackVertex left;
-        RedBlackVertex right;
-        String colour;
-        Boolean isLeaf;
+        private Integer value;
+        private RedBlackVertex left;
+        private RedBlackVertex right;
+        private String colour;
+        private Boolean isLeaf;
 
+        //Constructors
         public RedBlackVertex() {
             this.value = null;
             this.left = null;
@@ -187,16 +213,28 @@ public class RedBlackTree {
             this.isLeaf = false;
         }
 
+        /**
+         * Sets the colour of a vertex
+         * @param colour Red or Black
+         */
         public void setColour(String colour) {
             this.colour = colour;
         }
 
+        /**
+         * Gets the value stored in the vertex
+         * @return the value
+         */
         public int getValue() {
-            return value;
+            return this.value;
         }
 
+        /**
+         * Gets the colour of the vertex
+         * @return Red or black
+         */
         public String getColour() {
-            return colour;
+            return this.colour;
         }
     }
 }

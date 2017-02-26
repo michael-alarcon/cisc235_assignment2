@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cisc235_assignment2;
 
 /**
- *
- * @author Michael Alarcon
+ * @author Michael Alarcon Student ID - 10172841 I confirm that this submission
+ * is my own work and is consistent with the Queen's regulations on Academic
+ * Integrity.
  */
 public class Cisc235_assignment2 {
 
@@ -15,30 +11,17 @@ public class Cisc235_assignment2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        BinarySearchTree sTree = new BinarySearchTree();
-//        
-//        sTree.insert(6);
-//        sTree.insert(10);
-//        sTree.insert(8);
-//        sTree.insert(3);
-//        sTree.insert(20);
-//        sTree.searchPath(8);
-//        sTree.totalDepth();
-
         RedBlackTree rbTree = new RedBlackTree();
-
-        rbTree.insert(6);
-        rbTree.insert(10);
-        rbTree.insert(8);
-        rbTree.insert(20);
-        rbTree.insert(3);
-        System.out.println(rbTree.root.value + " " + rbTree.root.colour);
-        System.out.println(rbTree.root.left.value + " " + rbTree.root.left.colour);
-        System.out.println(rbTree.root.right.value + " " + rbTree.root.right.colour);
-        System.out.println(rbTree.root.left.left.value + " " + rbTree.root.left.left.colour);
-        System.out.println(rbTree.root.right.right.value + " " + rbTree.root.right.right.colour);
-        rbTree.searchPath(3);
-        rbTree.totalDepth();
+        int[] array = new int[1000];
+//        int range = (1000 -1 ) + 1;
+        int index = 0;
+        for (int x = 0; x < 1000; x++) {
+            array[x] = x;
+        }
+        for (int x = 0; x < 1000; x++) {
+            index = (int) (Math.random() * 1000);
+            rbTree.insert(array[index]);
+        }
     }
 
 }

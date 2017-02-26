@@ -1,13 +1,15 @@
 package cisc235_assignment2;
 
 /**
- *
- * @author Michael Alarcon
+ * @author Michael Alarcon Student ID - 10172841 I confirm that this submission
+ * is my own work and is consistent with the Queen's regulations on Academic
+ * Integrity.
  */
 public class BinarySearchTree {
 
-    BinaryTreeVertex root;
+    private BinaryTreeVertex root;
 
+    //Constructors
     protected BinarySearchTree() {
         this.root = null;
     }
@@ -20,6 +22,12 @@ public class BinarySearchTree {
         root = insert(root, value);
     }
 
+    /**
+     * Inserts a new value to the red black tree
+     * @param tree tree the value is being inserted into
+     * @param newValue the value being inserted
+     * @return returns the updated tree
+     */
     private BinaryTreeVertex insert(BinaryTreeVertex tree, int newValue) {
         if (tree == null) {
             tree = new BinaryTreeVertex(newValue);
@@ -38,6 +46,12 @@ public class BinarySearchTree {
         System.out.println(searchPath(root, value));
     }
 
+    /**
+     * Searches for the path of a desired value.
+     * @param tree tree to be searched
+     * @param value value to be searched
+     * @return a string which displays the path to get to the value
+     */
     private String searchPath(BinaryTreeVertex tree, int value) {
         if (tree == null) {
             return "";
@@ -54,6 +68,12 @@ public class BinarySearchTree {
         System.out.println(totalDepth(root, 0));
     }
     
+    /**
+     * Returns the sum of the depths of all the values in the tree
+     * @param tree tree to be used
+     * @param level the level of the value in the tree where the root is level 0
+     * @return the total depth
+     */
     public int totalDepth(BinaryTreeVertex tree, int level) {
         if (tree == null) {
             return 0;
@@ -62,12 +82,16 @@ public class BinarySearchTree {
         }
     }
     
+    /**
+     * Inner class used only by the BinarySearchTree class
+     */
     protected class BinaryTreeVertex {
 
-        Integer value;
-        BinaryTreeVertex left;
-        BinaryTreeVertex right;
+        private Integer value;
+        private BinaryTreeVertex left;
+        private BinaryTreeVertex right;
 
+        //Constructors
         public BinaryTreeVertex() {
             this.value = null;
             this.left = null;
@@ -80,6 +104,10 @@ public class BinarySearchTree {
             this.right = null;
         }
 
+        /**
+         * Gets the value stored in the vertex
+         * @return the value
+         */
         public int getValue() {
             return this.value;
         }
