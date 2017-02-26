@@ -42,8 +42,8 @@ public class BinarySearchTree {
         }
     }
 
-    protected void searchPath(int value) {
-        System.out.println(searchPath(root, value));
+    protected String searchPath(int value) {
+        return searchPath(root, value);
     }
 
     /**
@@ -64,8 +64,8 @@ public class BinarySearchTree {
         }
     }
 
-    protected void totalDepth() {
-        System.out.println(totalDepth(root, 0));
+    protected int totalDepth() {
+        return totalDepth(root, 0);
     }
     
     /**

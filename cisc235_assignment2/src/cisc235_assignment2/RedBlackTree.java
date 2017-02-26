@@ -7,8 +7,8 @@ package cisc235_assignment2;
  */
 public class RedBlackTree {
 
-    private RedBlackVertex root;
-    private int totalRotations = 0;
+    protected RedBlackVertex root;
+    protected int totalRotations = 0;
 
     //Constructors
     public RedBlackTree() {
@@ -26,6 +26,7 @@ public class RedBlackTree {
 
     /**
      * Inserts a new value to the red black tree
+     *
      * @param tree tree the value is being inserted into
      * @param newValue the value being inserted
      * @return returns the updated tree
@@ -66,6 +67,7 @@ public class RedBlackTree {
 
     /**
      * Fixes the red black tree depending on the situation.
+     *
      * @param tree the tree to be fixed
      * @param fixType type of fixed needed to be implemented
      * @return the fixed tree
@@ -74,83 +76,88 @@ public class RedBlackTree {
         RedBlackVertex grandChild;
         RedBlackVertex child;
         RedBlackVertex sibling;
-        totalRotations++;
-        
-        if (fixType.equals("rr")) {
-            child = tree.right;
-            sibling = tree.left;
-            if (sibling.getColour().equals("Red")) {
-                child.setColour("Black");
-                sibling.setColour("Black");
-                tree.setColour("Red");
-                return tree;
-            } else {
-                tree.right = child.left;
-                child.left = tree;
-                child.setColour("Black");
-                tree.setColour("Red");
-                return child;
-            }
-        } else if (fixType.equals("rl")) {
-            child = tree.right;
-            sibling = tree.left;
-            if (sibling.getColour().equals("Red")) {
-                child.setColour("Black");
-                sibling.setColour("Black");
-                tree.setColour("Red");
-                return tree;
-            } else {
-                grandChild = child.left;
-                child.left = grandChild.right;
-                tree.right = grandChild.left;
-                grandChild.left = tree;
-                grandChild.right = child;
-                grandChild.setColour("Black");
-                tree.setColour("Red");
-                return grandChild;
-            }
-        } else if (fixType.equals("ll")) {
-            child = tree.left;
-            sibling = tree.right;
-            if (sibling.getColour().equals("Red")) {
-                child.setColour("Black");
-                sibling.setColour("Black");
-                tree.setColour("Red");
-                return tree;
-            } else {
-                tree.left = child.right;
-                child.right = tree;
-                child.setColour("Black");
-                tree.setColour("Red");
-                return child;
-            }
-        } else { 
-            child = tree.left;
-            sibling = tree.right;
-            if (sibling.getColour().equals("Red")) {
-                child.setColour("Black");
-                sibling.setColour("Black");
-                tree.setColour("Red");
-                return tree;
-            } else {
-                grandChild = child.right;
-                child.right = grandChild.left;
-                tree.left = grandChild.right;
-                grandChild.right = tree;
-                grandChild.left = child;
-                grandChild.setColour("Black");
-                tree.setColour("Red");
-                return grandChild;
-            }
+
+        switch (fixType) {
+            case "rr":
+                child = tree.right;
+                sibling = tree.left;
+                if (sibling.getColour().equals("Red")) {
+                    child.setColour("Black");
+                    sibling.setColour("Black");
+                    tree.setColour("Red");
+                    return tree;
+                } else {
+                    totalRotations++;
+                    tree.right = child.left;
+                    child.left = tree;
+                    child.setColour("Black");
+                    tree.setColour("Red");
+                    return child;
+                }
+            case "rl":
+                child = tree.right;
+                sibling = tree.left;
+                if (sibling.getColour().equals("Red")) {
+                    child.setColour("Black");
+                    sibling.setColour("Black");
+                    tree.setColour("Red");
+                    return tree;
+                } else {
+                    totalRotations++;
+                    grandChild = child.left;
+                    child.left = grandChild.right;
+                    tree.right = grandChild.left;
+                    grandChild.left = tree;
+                    grandChild.right = child;
+                    grandChild.setColour("Black");
+                    tree.setColour("Red");
+                    return grandChild;
+                }
+            case "ll":
+                child = tree.left;
+                sibling = tree.right;
+                if (sibling.getColour().equals("Red")) {
+                    child.setColour("Black");
+                    sibling.setColour("Black");
+                    tree.setColour("Red");
+                    return tree;
+                } else {
+                    totalRotations++;
+                    tree.left = child.right;
+                    child.right = tree;
+                    child.setColour("Black");
+                    tree.setColour("Red");
+                    return child;
+                }
+            default:
+                child = tree.left;
+                sibling = tree.right;
+                if (sibling.getColour().equals("Red")) {
+                    child.setColour("Black");
+                    sibling.setColour("Black");
+                    tree.setColour("Red");
+                    return tree;
+                } else {
+                    totalRotations++;
+                    grandChild = child.right;
+                    child.right = grandChild.left;
+                    tree.left = grandChild.right;
+                    grandChild.right = tree;
+                    grandChild.left = child;
+                    grandChild.setColour("Black");
+                    tree.setColour("Red");
+                    return grandChild;
+                }
         }
     }
-    
-    protected void searchPath(int value) {
-        System.out.println(searchPath(root, value));
+
+    protected String searchPath(int value) {
+        return searchPath(root, value);
     }
 
     /**
      * Searches for the path of a desired value.
+     *
      * @param tree tree to be searched
      * @param value value to be searched
      * @return a string which displays the path to get to the value
@@ -159,20 +166,21 @@ public class RedBlackTree {
         if (tree == null) {
             return "";
         } else if (tree.getValue() == value) {
-            return value + "";
+            return value + " (" + tree.getColour() + ")";
         } else if (value > tree.getValue()) {
-            return tree.value + ", " + searchPath(tree.right, value);
+            return tree.value + " (" + tree.getColour() + ")" + ", " + searchPath(tree.right, value);
         } else {
-            return tree.value + ", " + searchPath(tree.left, value);
+            return tree.value + " (" + tree.getColour() + ")" + ", " + searchPath(tree.left, value);
         }
     }
 
-    protected void totalDepth() {
-        System.out.println(totalDepth(root, 0));
+    protected int totalDepth() {
+        return totalDepth(root, 0);
     }
 
     /**
      * Returns the sum of the depths of all the values in the tree
+     *
      * @param tree tree to be used
      * @param level the level of the value in the tree where the root is level 0
      * @return the total depth
@@ -185,16 +193,29 @@ public class RedBlackTree {
         }
     }
 
+    public void resetRotations() {
+        totalRotations = 0;
+    }
+
+    /**
+     * Gets the total number of rotations
+     *
+     * @return total rotations.
+     */
+    public int getRotations() {
+        return this.totalRotations;
+    }
+
     /**
      * Inner class used only for the RedBlackTree class.
      */
     protected class RedBlackVertex {
 
-        private Integer value;
-        private RedBlackVertex left;
-        private RedBlackVertex right;
-        private String colour;
-        private Boolean isLeaf;
+        public Integer value;
+        public RedBlackVertex left;
+        public RedBlackVertex right;
+        public String colour;
+        public Boolean isLeaf;
 
         //Constructors
         public RedBlackVertex() {
@@ -215,6 +236,7 @@ public class RedBlackTree {
 
         /**
          * Sets the colour of a vertex
+         *
          * @param colour Red or Black
          */
         public void setColour(String colour) {
@@ -223,6 +245,7 @@ public class RedBlackTree {
 
         /**
          * Gets the value stored in the vertex
+         *
          * @return the value
          */
         public int getValue() {
@@ -231,6 +254,7 @@ public class RedBlackTree {
 
         /**
          * Gets the colour of the vertex
+         *
          * @return Red or black
          */
         public String getColour() {
