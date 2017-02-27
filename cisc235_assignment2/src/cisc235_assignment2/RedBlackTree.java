@@ -7,8 +7,8 @@ package cisc235_assignment2;
  */
 public class RedBlackTree {
 
-    protected RedBlackVertex root;
-    protected int totalRotations = 0;
+    public RedBlackVertex root;
+    public int totalRotations = 0;
 
     //Constructors
     public RedBlackTree() {
@@ -19,7 +19,7 @@ public class RedBlackTree {
         this.root = node;
     }
 
-    protected void insert(int value) {
+    public void insert(int value) {
         root = insert(root, value);
         root.setColour("Black");
     }
@@ -31,7 +31,7 @@ public class RedBlackTree {
      * @param newValue the value being inserted
      * @return returns the updated tree
      */
-    protected RedBlackVertex insert(RedBlackVertex tree, int newValue) {
+    private RedBlackVertex insert(RedBlackVertex tree, int newValue) {
         if (tree.isLeaf) {
             tree = new RedBlackVertex(newValue);
             return tree;
@@ -151,7 +151,7 @@ public class RedBlackTree {
         }
     }
 
-    protected String searchPath(int value) {
+    public String searchPath(int value) {
         return searchPath(root, value);
     }
 
@@ -174,7 +174,7 @@ public class RedBlackTree {
         }
     }
 
-    protected int totalDepth() {
+    public int totalDepth() {
         return totalDepth(root, 0);
     }
 

@@ -7,18 +7,18 @@ package cisc235_assignment2;
  */
 public class BinarySearchTree {
 
-    private BinaryTreeVertex root;
+    public BinaryTreeVertex root;
 
     //Constructors
-    protected BinarySearchTree() {
+    public BinarySearchTree() {
         this.root = null;
     }
 
-    protected BinarySearchTree(BinaryTreeVertex node) {
+    public BinarySearchTree(BinaryTreeVertex node) {
         this.root = node;
     }
 
-    protected void insert(int value) {
+    public void insert(int value) {
         root = insert(root, value);
     }
 
@@ -42,7 +42,7 @@ public class BinarySearchTree {
         }
     }
 
-    protected String searchPath(int value) {
+    public String searchPath(int value) {
         return searchPath(root, value);
     }
 
@@ -64,7 +64,7 @@ public class BinarySearchTree {
         }
     }
 
-    protected int totalDepth() {
+    public int totalDepth() {
         return totalDepth(root, 0);
     }
     
@@ -74,7 +74,7 @@ public class BinarySearchTree {
      * @param level the level of the value in the tree where the root is level 0
      * @return the total depth
      */
-    public int totalDepth(BinaryTreeVertex tree, int level) {
+    private int totalDepth(BinaryTreeVertex tree, int level) {
         if (tree == null) {
             return 0;
         } else {
@@ -87,9 +87,9 @@ public class BinarySearchTree {
      */
     protected class BinaryTreeVertex {
 
-        private Integer value;
-        private BinaryTreeVertex left;
-        private BinaryTreeVertex right;
+        public Integer value;
+        public BinaryTreeVertex left;
+        public BinaryTreeVertex right;
 
         //Constructors
         public BinaryTreeVertex() {
